@@ -38,14 +38,36 @@ class _NewExpenseState extends State<NewExpense> {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('Invalid inputs'),
-          content: const Text('Please enter valid Title, Amount and Date'),
+          backgroundColor: const Color.fromARGB(238, 191, 241, 176),
+          title: const Text(
+            'Invalid inputs',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w800,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: const Text(
+            'Please enter valid Title, Amount and Date',
+            style: TextStyle(
+              color: Colors.red,
+              fontWeight: FontWeight.w800,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.center,
+          ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(ctx);
               },
-              child: const Text('okey'),
+              child: const Text(
+                'okey',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+              ),
             ),
           ],
         ),
@@ -75,28 +97,50 @@ class _NewExpenseState extends State<NewExpense> {
     return Padding(
       padding: const EdgeInsets.only(
         left: 16,
-        top: 48,
+        top: 108,
         right: 16,
         bottom: 16,
       ),
       child: Column(
         children: [
           TextField(
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16),
             controller: _titleController,
             maxLength: 50,
             decoration: const InputDecoration(
-              label: Text('Title'),
+              label: Text(
+                'Title',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
             ),
           ),
           Row(
             children: [
               Expanded(
                 child: TextField(
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600),
                   controller: _amountController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    prefixText: "\$",
-                    label: Text('\$ Amount'),
+                    prefixText: "\$ ",
+                    prefixStyle: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                    label: Text(
+                      '\$ Amount',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -112,10 +156,17 @@ class _NewExpenseState extends State<NewExpense> {
                       _selectedDate == null
                           ? 'No date Selected'
                           : formatter.format(_selectedDate!),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                     IconButton(
                       onPressed: _presentDatePicker,
-                      icon: const Icon(Icons.calendar_month),
+                      icon: const Icon(
+                        Icons.calendar_month,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -123,12 +174,14 @@ class _NewExpenseState extends State<NewExpense> {
             ],
           ),
           const SizedBox(
-            height: 10,
+            height: 100,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               DropdownButton(
+                  borderRadius: BorderRadius.circular(5),
+                  dropdownColor: Colors.blueGrey,
                   value: _selectedCategory,
                   items: Category.values
                       .map(
@@ -136,6 +189,10 @@ class _NewExpenseState extends State<NewExpense> {
                           value: category,
                           child: Text(
                             category.name.toUpperCase(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 238, 219, 219),
+                            ),
                           ),
                         ),
                       )
@@ -152,6 +209,9 @@ class _NewExpenseState extends State<NewExpense> {
               ElevatedButton(
                 onPressed: _submitExpenseData,
                 child: const Text('Save Expense'),
+              ),
+              const SizedBox(
+                width: 5,
               ),
               ElevatedButton(
                 onPressed: () {

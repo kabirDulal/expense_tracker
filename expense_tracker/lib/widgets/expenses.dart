@@ -17,6 +17,7 @@ class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [];
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+        backgroundColor: const Color.fromARGB(255, 45, 44, 49),
         isScrollControlled: true,
         context: context,
         builder: (ctx) => NewExpense(onAddExpense: _addExpense));
@@ -102,7 +103,10 @@ class _ExpensesState extends State<Expenses> {
         ],
         title: const Text(
           'Expense Tracker App',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         backgroundColor: const Color.fromARGB(255, 26, 89, 105),
       ),

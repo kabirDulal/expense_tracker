@@ -7,7 +7,7 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(context) {
     return Card(
-      color: const Color.fromARGB(255, 51, 160, 233),
+      color: const Color.fromARGB(192, 3, 125, 161),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Column(
@@ -26,6 +26,11 @@ class ExpenseItem extends StatelessWidget {
               children: [
                 Text(
                   '\$${expense.amount.toStringAsFixed(2)}',
+                  style: const TextStyle(
+                    color: Color.fromARGB(225, 180, 7, 7),
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16,
+                  ),
                   //it will return with just 2 decimal after the integer
                 ),
                 const Spacer(),
@@ -39,6 +44,10 @@ class ExpenseItem extends StatelessWidget {
                         ),
                         Text(
                           expense.formattedDate,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 16,
+                          ),
                         ),
                       ],
                     ),
