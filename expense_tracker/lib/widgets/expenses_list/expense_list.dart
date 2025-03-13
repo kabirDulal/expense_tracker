@@ -12,14 +12,18 @@ class ExpensesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: expenses.length,
-      itemBuilder: (ctx, index) => Dismissible(
-        key: ValueKey(expenses[index]),
-        onDismissed: (direction) {
-          onRemoveExpense(expenses[index]);
-        },
-        child: ExpenseItem(expense: expenses[index]),
+    return Container(
+      margin: const EdgeInsets.only(top: 20, bottom: 50),
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: expenses.length,
+        itemBuilder: (ctx, index) => Dismissible(
+          key: ValueKey(expenses[index]),
+          onDismissed: (direction) {
+            onRemoveExpense(expenses[index]);
+          },
+          child: ExpenseItem(expense: expenses[index]),
+        ),
       ),
     );
   }

@@ -29,22 +29,56 @@ class _ExpensesState extends State<Expenses> {
   }
 
   void _removeExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
     setState(() {
       _registeredExpenses.remove(expense);
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 5),
+        content: Container(
+          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.deepOrangeAccent,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: const Text(
+            "Expense Deleted",
+          ),
+        ),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              _registeredExpenses.insert(expenseIndex, expense);
+            });
+          },
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget mainContent = const Center(
-      child: Text(
-        "There is no Expense currently please enter any expense you have",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.blue,
-          fontSize: 24,
+    Widget mainContent = Center(
+      child: Container(
+        margin: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.deepOrangeAccent,
+          borderRadius: BorderRadius.circular(5),
         ),
-        textAlign: TextAlign.center,
+        child: const Text(
+          "There is no Expense currently please enter any expense you have",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontSize: 24,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
     if (_registeredExpenses.isNotEmpty) {
@@ -54,14 +88,23 @@ class _ExpensesState extends State<Expenses> {
       );
     }
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 244, 250, 252),
       appBar: AppBar(
+        shadowColor: const Color.fromARGB(255, 76, 4, 134),
         actions: [
           IconButton(
             onPressed: _openAddExpenseOverlay,
-            icon: const Icon(Icons.add),
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
           ),
         ],
-        title: const Text('Expense Tracker App'),
+        title: const Text(
+          'Expense Tracker App',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        ),
+        backgroundColor: const Color.fromARGB(255, 26, 89, 105),
       ),
       body: Column(
         children: [
