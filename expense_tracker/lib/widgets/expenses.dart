@@ -18,7 +18,7 @@ class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [];
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-        backgroundColor: const Color.fromARGB(255, 45, 44, 49),
+        backgroundColor: const Color.fromARGB(207, 8, 73, 93),
         isScrollControlled: true,
         context: context,
         builder: (ctx) => NewExpense(onAddExpense: _addExpense));

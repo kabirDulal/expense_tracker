@@ -11,16 +11,17 @@ class ExpenseItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
               expense.title,
               style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
+                  color: Color.fromARGB(255, 2, 46, 56),
+                  fontSize: 22,
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(
-              height: 4,
+              height: 10,
             ),
             Row(
               children: [
