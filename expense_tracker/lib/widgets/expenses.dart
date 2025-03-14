@@ -1,7 +1,6 @@
 import 'package:expense_tracker/widgets/chart/chart.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/widgets/chart/chart.dart';
 import 'package:expense_tracker/widgets/expenses_list/expense_list.dart';
 import 'package:expense_tracker/models/expense.dart';
 
@@ -16,6 +15,7 @@ class Expenses extends StatefulWidget {
 
 class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [];
+
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
         backgroundColor: const Color.fromARGB(207, 8, 73, 93),
@@ -39,19 +39,26 @@ class _ExpensesState extends State<Expenses> {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: const Duration(seconds: 5),
+        backgroundColor: const Color.fromARGB(255, 16, 167, 218),
+        duration: const Duration(seconds: 15),
         content: Container(
           margin: const EdgeInsets.all(20),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.deepOrangeAccent,
+            color: const Color.fromARGB(255, 3, 110, 149),
             borderRadius: BorderRadius.circular(5),
           ),
           child: Text(
             "$deletedExpenseTitle is  Deleted",
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Color.fromARGB(255, 1, 24, 29),
+            ),
           ),
         ),
         action: SnackBarAction(
+          textColor: const Color.fromARGB(255, 1, 16, 29),
           label: 'Undo',
           onPressed: () {
             setState(() {
@@ -70,14 +77,14 @@ class _ExpensesState extends State<Expenses> {
         margin: const EdgeInsets.only(left: 20, right: 20),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.deepOrangeAccent,
+          color: const Color.fromARGB(232, 56, 176, 209),
           borderRadius: BorderRadius.circular(5),
         ),
         child: const Text(
           "There is no Expense currently please enter any expense you have",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: Color.fromARGB(255, 1, 40, 45),
             fontSize: 24,
           ),
           textAlign: TextAlign.center,
@@ -91,7 +98,7 @@ class _ExpensesState extends State<Expenses> {
       );
     }
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 244, 250, 252),
+      backgroundColor: const Color.fromARGB(255, 156, 181, 189),
       appBar: AppBar(
         shadowColor: const Color.fromARGB(255, 76, 4, 134),
         actions: [

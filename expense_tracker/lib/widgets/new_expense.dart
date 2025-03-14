@@ -38,7 +38,7 @@ class _NewExpenseState extends State<NewExpense> {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          backgroundColor: const Color.fromARGB(238, 191, 241, 176),
+          backgroundColor: const Color.fromARGB(255, 5, 127, 154),
           title: const Text(
             'Invalid inputs',
             style: TextStyle(
@@ -50,9 +50,9 @@ class _NewExpenseState extends State<NewExpense> {
           content: const Text(
             'Please enter valid Title, Amount and Date',
             style: TextStyle(
-              color: Colors.red,
+              color: Color.fromARGB(255, 0, 18, 34),
               fontWeight: FontWeight.w800,
-              fontSize: 18,
+              fontSize: 22,
             ),
             textAlign: TextAlign.center,
           ),
@@ -64,9 +64,9 @@ class _NewExpenseState extends State<NewExpense> {
               child: const Text(
                 'okey',
                 style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: Color.fromARGB(255, 0, 18, 34)),
               ),
             ),
           ],
