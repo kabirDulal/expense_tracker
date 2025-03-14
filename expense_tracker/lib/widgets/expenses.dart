@@ -1,6 +1,7 @@
+import 'package:expense_tracker/widgets/chart/chart.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
-
+import 'package:expense_tracker/widgets/chart/chart.dart';
 import 'package:expense_tracker/widgets/expenses_list/expense_list.dart';
 import 'package:expense_tracker/models/expense.dart';
 
@@ -31,6 +32,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _removeExpense(Expense expense) {
     final expenseIndex = _registeredExpenses.indexOf(expense);
+    final deletedExpenseTitle = _registeredExpenses[expenseIndex].title;
     setState(() {
       _registeredExpenses.remove(expense);
     });
@@ -45,8 +47,8 @@ class _ExpensesState extends State<Expenses> {
             color: Colors.deepOrangeAccent,
             borderRadius: BorderRadius.circular(5),
           ),
-          child: const Text(
-            "Expense Deleted",
+          child: Text(
+            "$deletedExpenseTitle is  Deleted",
           ),
         ),
         action: SnackBarAction(
@@ -112,6 +114,7 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(
         children: [
+          Chart(expenses: _registeredExpenses),
           Expanded(
             child: mainContent,
           ),
