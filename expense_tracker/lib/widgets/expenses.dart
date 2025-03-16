@@ -40,7 +40,7 @@ class _ExpensesState extends State<Expenses> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: const Color.fromARGB(255, 16, 167, 218),
-        duration: const Duration(seconds: 15),
+        duration: const Duration(seconds: 5),
         content: Container(
           margin: const EdgeInsets.all(20),
           padding: const EdgeInsets.all(16),
