@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
+import 'package:flutter/rendering.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key, required this.onAddExpense});
@@ -94,135 +95,143 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 16,
-        top: 108,
-        right: 16,
-        bottom: 16,
-      ),
-      child: Column(
-        children: [
-          TextField(
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16),
-            controller: _titleController,
-            maxLength: 50,
-            decoration: const InputDecoration(
-              label: Text(
-                'Title',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600),
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    prefixText: "\$ ",
-                    prefixStyle: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                    label: Text(
-                      '\$ Amount',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
+    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
+    return LayoutBuilder(builder: (context, Constraints) {
+      return SizedBox(
+        height: double.infinity,
+        width: double.infinity,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(16, 16, 16, keyboardSpace + 16),
+            child: Expanded(
+              child: Column(
+                children: [
+                  TextField(
+                    style: const TextStyle(
                         color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16),
+                    controller: _titleController,
+                    maxLength: 50,
+                    decoration: const InputDecoration(
+                      label: Text(
+                        'Title',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(
-                width: 40,
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      _selectedDate == null
-                          ? 'No date Selected'
-                          : formatter.format(_selectedDate!),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: _presentDatePicker,
-                      icon: const Icon(
-                        Icons.calendar_month,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 100,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              DropdownButton(
-                  borderRadius: BorderRadius.circular(5),
-                  dropdownColor: Colors.blueGrey,
-                  value: _selectedCategory,
-                  items: Category.values
-                      .map(
-                        (category) => DropdownMenuItem(
-                          value: category,
-                          child: Text(
-                            category.name.toUpperCase(),
-                            style: const TextStyle(
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          style: const TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w600),
+                          controller: _amountController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            prefixText: "\$ ",
+                            prefixStyle: TextStyle(
+                              color: Colors.white,
                               fontWeight: FontWeight.w600,
-                              color: Color.fromARGB(255, 238, 219, 219),
+                              fontSize: 16,
+                            ),
+                            label: Text(
+                              '\$ Amount',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
-                      )
-                      .toList(),
-                  onChanged: (value) {
-                    if (value == null) {
-                      return;
-                    }
-                    setState(() {
-                      _selectedCategory = value;
-                    });
-                  }),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: _submitExpenseData,
-                child: const Text('Save Expense'),
+                      ),
+                      const SizedBox(
+                        width: 40,
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              _selectedDate == null
+                                  ? 'No date Selected'
+                                  : formatter.format(_selectedDate!),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: _presentDatePicker,
+                              icon: const Icon(
+                                Icons.calendar_month,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      DropdownButton(
+                          borderRadius: BorderRadius.circular(5),
+                          dropdownColor: Colors.blueGrey,
+                          value: _selectedCategory,
+                          items: Category.values
+                              .map(
+                                (category) => DropdownMenuItem(
+                                  value: category,
+                                  child: Text(
+                                    category.name.toUpperCase(),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromARGB(255, 238, 219, 219),
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: (value) {
+                            if (value == null) {
+                              return;
+                            }
+                            setState(() {
+                              _selectedCategory = value;
+                            });
+                          }),
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: _submitExpenseData,
+                        child: const Text('Save Expense'),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Cancel'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              const SizedBox(
-                width: 5,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Cancel'),
-              ),
-            ],
+            ),
           ),
-        ],
-      ),
-    );
+        ),
+      );
+    });
   }
 }

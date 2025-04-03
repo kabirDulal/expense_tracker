@@ -18,6 +18,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true,
         backgroundColor: const Color.fromARGB(207, 8, 73, 93),
         isScrollControlled: true,
         context: context,
@@ -72,6 +73,7 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     Widget mainContent = Center(
       child: Container(
         margin: const EdgeInsets.only(left: 20, right: 20),
@@ -119,12 +121,19 @@ class _ExpensesState extends State<Expenses> {
         ),
         backgroundColor: const Color.fromARGB(255, 26, 89, 105),
       ),
-      body: Column(
+      body:width < 600 ? Column(
         children: [
           Chart(expenses: _registeredExpenses),
           Expanded(
             child: mainContent,
           ),
+        ],
+      ): Row(
+        children: [          
+          Expanded(child: Chart(expenses: _registeredExpenses)),
+          Expanded(
+            child: mainContent,
+          ),        
         ],
       ),
     );
